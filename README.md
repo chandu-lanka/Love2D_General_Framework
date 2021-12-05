@@ -6,7 +6,7 @@ Those things include:
       shaders; light;
       sprite centering;
       json;
-      physcis; bonus math; vector math;
+      physics; bonus math; vector math;
       miscellaneous stuff;
       particle system;
       screen resizing;
