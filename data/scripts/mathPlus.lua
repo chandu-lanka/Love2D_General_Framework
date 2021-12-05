@@ -80,6 +80,18 @@ function moveRect(rect,motion,collidesWith)
     return rect
 end
 
+-- Draw cool debug rects
+function drawCollider(collider)
+    setColor(0,0,255,50)
+    love.graphics.rectangle("fill",collider.x,collider.y,collider.w,collider.h)
+    setColor(0,0,255,255)
+end
+
+function drawColliders(colliders)
+    for id,C in pairs(colliders) do
+        drawCollider(C)
+end end
+
 --------------------------VECTORS
 function newVec(x,y) --Makes new table with x and y
     return {x=x,y=y,getRot=getRot,getLen=getLen,normalize=normalize,rotate=rotate}

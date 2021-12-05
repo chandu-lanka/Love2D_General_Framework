@@ -5,19 +5,21 @@ function love.load()
     screenRes = {love.graphics.getWidth(),love.graphics.getHeight()}
 
     -- Window and defaulting
-    global_timer = 0; love.graphics.setDefaultFilter("nearest","nearest")
+    globalTimer = 0; love.graphics.setDefaultFilter("nearest","nearest")
 
     fullscreen = false; title = "Ne_mene´s Framework"
 
     WS = {800,600}; wFlags = {resizable=true}
     aspectRatio = {WS[1]/WS[2],WS[2]/WS[1]}
     love.graphics.setBackgroundColor(0,0,0,1); love.window.setMode(WS[1],WS[2],wFlags); display = love.graphics.newCanvas(WS[1],WS[2]); displayScale = 1
+    postProCanvas = love.graphics.newCanvas(WS[1],WS[2])
 
     love.window.setTitle(title.."                   [F1 for fullscreen]")
 
     -- Imports
-    json = require "data.scripts.json"; require "data.scripts.misc"; require "data.scripts.loading"; require "data.shaders"; require "data.scripts.mathPlus"; require "data.scripts.input"; require "data.scripts.sprites"; require "data.scripts.particles"
-
+    json = require "data.scripts.json"; require "data.scripts.misc"; require "data.scripts.loading"; require "data.scripts.shaders"; require "data.scripts.mathPlus"; require "data.scripts.input"; require "data.scripts.sprites"; require "data.scripts.particles"
+    require "data.scripts.tiles"; require "data.scripts.timer"
+    
     -- Mouse
     love.mouse.setVisible(false)
     mouseMode = "pointer"
@@ -32,7 +34,7 @@ function love.load()
     }
 
     -- Set default scene (the first one)
-    scene = "splash"; firstScene = "blank"
+    scene = "blank"; firstScene = "blank"
     scenes[scene][2]()
 
     -- Set joysticks
@@ -48,7 +50,7 @@ end
 function love.draw()
     -- Time and resetting
     dt = love.timer.getDelta()
-    global_timer = global_timer + dt
+    globalTimer = globalTimer + dt
     
     -- Mouse pos
     xM, yM = love.mouse.getPosition()
@@ -83,13 +85,21 @@ function love.draw()
     love.graphics.setColor(1,1,1,1)
     -- love.graphics.draw(mouse[mouseMode],xM,yM,0,SPRSCL,SPRSCL)
 
+    -- Post processing
+
+    for id,P in pairs(postPro) do
+        love.graphics.setShader(SHADERS[P])
+        love.graphics.setCanvas(postProCanvas)
+        love.graphics.draw(display,0,0)
+        love.graphics.setCanvas(display)
+        love.graphics.draw(postProCanvas,0,0)
+    end
+    love.graphics.setShader()
+
     -- Draw display
-    love.graphics.setShader(postPro)
     love.graphics.setCanvas()
 
     love.graphics.draw(display,w*0.5-dw*0.5*displayScale,h*0.5-dh*0.5*displayScale,0,displayScale,displayScale)
-
-    love.graphics.setShader()
     
     love.graphics.setColor(1,0,1,1)
     resetLights()

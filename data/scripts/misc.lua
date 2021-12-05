@@ -22,3 +22,15 @@ function setColor(r,g,b,a) -- setColor but it uses 0-255
     local convert = 0.003921
     love.graphics.setColor(r * convert, g * convert, b * convert, a * convert)
 end
+
+-- String stuff
+
+function splitString(inputstr, sep)
+    local sep = sep or "%s"
+    
+    local t={}
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+            table.insert(t, str)
+    end
+    return t
+end

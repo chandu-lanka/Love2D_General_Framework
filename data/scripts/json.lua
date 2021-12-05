@@ -1,3 +1,5 @@
+
+-- NOTE: This file was not made by me, check out "https://github.com/rxi" for more stuff like this json encoder!
 --
 -- json.lua
 --
