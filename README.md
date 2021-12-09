@@ -10,7 +10,7 @@ Those things include:
       miscellaneous stuff;
       particle system;
       screen resizing;
-      input for: controllers, mouses and keyboars (pressed as well as just pressed, analog sticcks for controllers as well);
+      input for: controllers, mouses and keyboars (pressed as well as just pressed, analog sticks for controllers as well);
       timers; scene managment
 
 - To make new project:
