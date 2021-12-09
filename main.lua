@@ -18,7 +18,7 @@ function love.load()
 
     -- Imports
     json = require "data.scripts.json"; require "data.scripts.misc"; require "data.scripts.loading"; require "data.scripts.shaders"; require "data.scripts.mathPlus"; require "data.scripts.input"; require "data.scripts.sprites"; require "data.scripts.particles"
-    require "data.scripts.tiles"; require "data.scripts.timer"
+    require "data.scripts.tiles"; require "data.scripts.timer"; require "data.scripts.camera"
     
     -- Mouse
     love.mouse.setVisible(false)
@@ -34,7 +34,7 @@ function love.load()
     }
 
     -- Set default scene (the first one)
-    scene = "blank"; firstScene = "blank"
+    scene = "splash"; firstScene = "blank"
     scenes[scene][2]()
 
     -- Set joysticks
@@ -80,6 +80,8 @@ function love.draw()
     transition = clamp(transition - dt,0,1)
     setColor(0,0,0,255*transition)
     love.graphics.rectangle("fill",0,0,800,600)
+
+    processCamera()
 
     -- Mouse
     love.graphics.setColor(1,1,1,1)
