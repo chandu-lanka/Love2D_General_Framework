@@ -14,6 +14,8 @@ SHADERS = {
     EMPTY = love.graphics.newShader((love.filesystem.read("data/shaders/EMPTY.fs")))
     ,
     INVERT = love.graphics.newShader((love.filesystem.read("data/shaders/INVERT.fs")))
+    ,
+    GRAYSCALE = love.graphics.newShader((love.filesystem.read("data/shaders/GRAYSCALE.fs")))
 }
 
 SHADERS.GLOW:send("xRatio",aspectRatio[2])
